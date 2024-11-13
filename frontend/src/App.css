@@ -1,0 +1,10 @@
+/* App.css */
+button {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  
