@@ -20,7 +20,6 @@ function App() {
                <Route path="/forgotpassword" element={<Forgotpassword/>}/>
                <Route path="/resetpasswordconfirm/:uidb64/:token" element={<Reset_Password/>}/>
                <Route path="/resetpassword" element={<Resetpassword/>}/>
-
                <Route path="/razorpay" element={<RazorpayPayment/>}/>
            </Routes>
       </BrowserRouter>

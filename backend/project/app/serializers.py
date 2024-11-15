@@ -61,3 +61,11 @@ class TranscationModelSerializer(serializers.ModelSerializer):
         model = Transaction
         fields = ["payment_id", "order_id", "signature", "amount","currency", "status","created_at","customer_address", "user"]
 
+
+from rest_framework import serializers
+from .models import RealEstateProperty
+
+class RealEstatePropertySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RealEstateProperty
+        fields = '__all__'  # You can specify the fields you need here

@@ -24,3 +24,14 @@ class TransactionAdmin(admin.ModelAdmin):
    list_display = ('id','user','payment_id', 'order_id', 'signature', 'amount','currency','status','created_at',)
 
 admin.site.register(Transaction, TransactionAdmin)
+
+
+from django.contrib import admin
+from .models import RealEstateProperty
+
+class RealEstatePropertyAdmin(admin.ModelAdmin):
+    list_display = ['title', 'price', 'location', 'property_type', 'created_at']
+    search_fields = ['title', 'location']
+    list_filter = ['property_type', 'created_at']
+
+admin.site.register(RealEstateProperty, RealEstatePropertyAdmin)

@@ -5,8 +5,15 @@
 #     path('', views.index, name="index")
 # ]
 
-from django.urls import path
+from django.urls import path, include
 from . views import *
+from rest_framework.routers import DefaultRouter
+from . import views
+from django.conf.urls.static import static
+from django.conf import settings
+
+router = DefaultRouter()
+router.register(r'properties', RealEstatePropertyViewSet)
 
 urlpatterns = [
     path('signup/', RegisterView.as_view(), name='signup'),
@@ -27,4 +34,11 @@ urlpatterns = [
         TransactionAPIView.as_view(), 
         name="razorpay-complete-order-api"
     ),
-]
+
+    # home page
+
+    path('home/', HomePageView.as_view(), name='home-api'),
+    path('api/', include(router.urls)),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

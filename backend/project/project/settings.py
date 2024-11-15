@@ -46,6 +46,10 @@ INSTALLED_APPS = [
     'ckeditor',
 ]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 CKEDITOR_CONFIGS = {
     'default': {
         # 'toolbar': 'full',
@@ -67,6 +71,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "corsheaders.middleware.CorsMiddleware",
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

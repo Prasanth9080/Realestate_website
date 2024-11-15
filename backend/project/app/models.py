@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 
 
 
-
 #### Razorpay:
 
 from django.db import models
@@ -30,3 +29,19 @@ class Transaction(models.Model):
     
     class Meta:
         verbose_name="Razorpay Order Detail"
+
+
+# app/models.py
+from django.db import models
+
+class RealEstateProperty(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField(default='')
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    location = models.CharField(max_length=200)
+    property_type = models.CharField(max_length=100, choices=[('residential', 'Residential'), ('commercial', 'Commercial')])
+    created_at = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='property_images/', blank=True, null=True)  # Image field
+
+    def __str__(self):
+        return self.title

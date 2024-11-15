@@ -367,3 +367,25 @@ class TransactionAPIView(APIView):
                 "error": transaction_serializer.errors
             }
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.tokens import RefreshToken
+
+class HomePageView(APIView):
+    permission_classes = [IsAuthenticated]  # Optional: Use if you want authentication
+
+    def get(self, request):
+        return Response({"message": "Welcome to the API!"})
+
+ 
+from rest_framework import viewsets
+from .models import RealEstateProperty
+from .serializers import RealEstatePropertySerializer
+
+class RealEstatePropertyViewSet(viewsets.ModelViewSet):
+    queryset = RealEstateProperty.objects.all()
+    serializer_class = RealEstatePropertySerializer
+
