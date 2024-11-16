@@ -1,12 +1,13 @@
 import React from "react";
+import './navbar.css';
 
 
 const navbar = () => {
     return(
         <div>
-            <nav className='navbar navbar-expand-lg bg-body-tertiary'>
+            <nav className='navbar navbar-expand-lg bg-white bg-gradient p-3'>
           <div className='container-fluid'>
-              <a className='navbar-brand' href='/home'>Navbar</a>
+              <a className='navbar-brand' href='/home'>ProPerties</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
               </button>
@@ -16,10 +17,10 @@ const navbar = () => {
                         <a className='nav-link active' aria-current='page' href='/home'>Home</a>
                       </li>
                       <li className='nav-item'>
-                        <a className='nav-link active' aria-current='page' href='/home'>About</a>
+                        <a className='nav-link active' aria-current='page' href='/about'>About</a>
                       </li>
                       <li className='nav-item'>
-                        <a className='nav-link active' aria-current='page' href='/home'>Contact</a>
+                        <a className='nav-link active' aria-current='page' href='/contact'>Contact</a>
                       </li>
                   </ul>
                   <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
@@ -33,7 +34,7 @@ const navbar = () => {
                           </ul>
                     </li>
                     <li className='nav-item'>
-                      <a className='nav-link active' aria-current='page' href='/logout'>Logout</a>
+                      <a className='nav-link active' aria-current='page' href='/login'>Logout</a>
                     </li>
                   </ul>
               </div>
@@ -45,3 +46,4 @@ const navbar = () => {
 
 
 export default navbar
+

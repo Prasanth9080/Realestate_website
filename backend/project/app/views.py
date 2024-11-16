@@ -389,3 +389,14 @@ class RealEstatePropertyViewSet(viewsets.ModelViewSet):
     queryset = RealEstateProperty.objects.all()
     serializer_class = RealEstatePropertySerializer
 
+
+# home page home property
+
+from rest_framework import viewsets
+from .models import HomeProperty
+from .serializers import HomePropertySerializer
+
+class HomePropertyViewset(viewsets.ModelViewSet):
+    queryset = HomeProperty.objects.all()
+    serializer_class = HomePropertySerializer
+

@@ -34,11 +34,13 @@ urlpatterns = [
         TransactionAPIView.as_view(), 
         name="razorpay-complete-order-api"
     ),
-
+ 
     # home page
 
-    path('home/', HomePageView.as_view(), name='home-api'),
+    path('/home', HomePageView.as_view(), name='home-api'),
     path('api/', include(router.urls)),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css'; // Import Swiper styles
+import 'swiper/css/bundle'; // Optional for additional styles
 import Navbar from './navbar';
 import axios from 'axios';
 import './Homepage.css';
+import Footer from './Footer';
+
 
 const HomePage = () => {
   const [properties, setProperties] = useState([]);
@@ -13,22 +18,20 @@ const HomePage = () => {
   const [maxPrice, setMaxPrice] = useState('');
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/properties/') // Correct endpoint
-      .then(response => {
-        console.log("Fetched properties:", response.data); // Debugging
+    axios
+      .get('http://127.0.0.1:8000/api/properties/')
+      .then((response) => {
         setProperties(response.data);
         setFilteredProperties(response.data);
         setLoading(false);
       })
-      .catch(error => {
-        console.error("Error fetching properties:", error);
+      .catch(() => {
         setLoading(false);
       });
   }, []);
 
-  // Handle search filtering
   const handleSearch = () => {
-    const filtered = properties.filter(property => {
+    const filtered = properties.filter((property) => {
       return (
         (!searchLocation || property.location.toLowerCase().includes(searchLocation.toLowerCase())) &&
         (!propertyType || property.property_type === propertyType) &&
@@ -36,7 +39,6 @@ const HomePage = () => {
         (!maxPrice || property.price <= parseInt(maxPrice))
       );
     });
-    console.log("Filtered properties:", filtered);
     setFilteredProperties(filtered);
   };
 
@@ -48,11 +50,10 @@ const HomePage = () => {
       <section className="hero-section">
         <h1>Find Your Dream Property</h1>
         <p>Browse through our collection of properties for sale or rent.</p>
-        <button>Explore Now</button>
       </section>
 
       <section className="search-filter">
-        <h2>Search for Properties</h2>
+        <h2>Search Properties</h2>
         <div className="search-inputs">
           <input
             type="text"
@@ -60,7 +61,7 @@ const HomePage = () => {
             value={searchLocation}
             onChange={(e) => setSearchLocation(e.target.value)}
           />
-          <select value={propertyType} onChange={(e) => setPropertyType(e.target.value)}>
+          <select value={propertyType} onChange={(e) => setPropertyType(e.target.value)} className='text-secondary'>
             <option value="">Property Type</option>
             <option value="residential">Residential</option>
             <option value="commercial">Commercial</option>
@@ -83,21 +84,20 @@ const HomePage = () => {
 
       <section className="featured-properties">
         <h2>Featured Properties</h2>
-        <div className="row"> {/* Use Bootstrap's row class */}
+        <div className="row">
           {filteredProperties.length > 0 ? (
-            filteredProperties.map(property => (
-              <div key={property.id} className="col-lg-3 col-md-4 col-sm-12 mb-4"> {/* Responsive grid */}
+            filteredProperties.map((property) => (
+              <div key={property.id} className="col-lg-3 col-md-4 col-sm-12 mb-4">
                 <div className="property-card">
                   <img
-                    src={`http://127.0.0.1:8000${property.image}`}
-                    alt={property.title}
-                    className="img-fluid" // Make image responsive
-                  />
+                    src={property.image}
+                    className="img-fluid"
+                  /> 
                   <div className="property-card-content">
                     <h3>{property.title}</h3>
                     <p>{property.description}</p>
-                    <p className="property-card-price">${property.price.toLocaleString()}</p>
-                    <button className='bg-info'>View Details</button>
+                    <p className="property-card-price py-2">${property.price.toLocaleString()}</p>
+                    <button className="bg-info col-lg-12 mx-auto">View Details</button>
                   </div>
                 </div>
               </div>
@@ -108,14 +108,35 @@ const HomePage = () => {
         </div>
       </section>
 
-          
-      <section className='featured-properties'>
+      <section className="featured-properties">
         <h2>Build Properties</h2>
-        <h6>Properties below</h6>
-          <div className='carousel'>
-
-          </div>
+        <div className="container py-4 px-4 justify-content-center">
+          <Swiper
+            grabCursor={true}
+            slidesPerView={3}
+            spaceBetween={30}
+            className="mySwiper"
+          >
+            {properties.map((property) => (
+              <SwiperSlide key={property.id}>
+                <div className="property-card-slider">
+                  <img
+                    src={property.image}
+                    alt={property.title}
+                    className="img-fluid slider-image"
+                  />
+                  <div className="slider-content">
+                    <h5>{property.title}</h5>
+                    <p>${property.price.toLocaleString()}</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

@@ -62,6 +62,8 @@ class TranscationModelSerializer(serializers.ModelSerializer):
         fields = ["payment_id", "order_id", "signature", "amount","currency", "status","created_at","customer_address", "user"]
 
 
+# Home page filter function
+
 from rest_framework import serializers
 from .models import RealEstateProperty
 
@@ -69,3 +71,16 @@ class RealEstatePropertySerializer(serializers.ModelSerializer):
     class Meta:
         model = RealEstateProperty
         fields = '__all__'  # You can specify the fields you need here
+
+
+# Home page home property
+
+from rest_framework import serializers
+from .models import HomeProperty
+
+class HomePropertySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HomeProperty
+        fields = '__all__'
+
+        

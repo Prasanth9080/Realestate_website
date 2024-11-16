@@ -1,3 +1,8 @@
+/* Add this in your CSS file */
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -11,6 +16,8 @@ body {
     background-image: url('C:\Alt_drx\frontend\public\assets\images\person-owning-multiple-property.jpg');
     background-size: cover;
     color: white;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   
   .hero-section h1 {

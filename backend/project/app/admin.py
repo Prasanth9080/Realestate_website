@@ -35,3 +35,14 @@ class RealEstatePropertyAdmin(admin.ModelAdmin):
     list_filter = ['property_type', 'created_at']
 
 admin.site.register(RealEstateProperty, RealEstatePropertyAdmin)
+
+
+from django.contrib import admin
+from .models import HomeProperty
+
+class HomePropertyAdmin(admin.ModelAdmin):
+    list_display = ['title', 'price', 'location']
+    search_fields = ['title', 'location']
+
+admin.site.register(HomeProperty, HomePropertyAdmin)
+
