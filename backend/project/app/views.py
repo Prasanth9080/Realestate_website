@@ -310,6 +310,14 @@ class RazorpayOrderAPIView(APIView):
 #             }
 #             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
+
+@ensure_csrf_cookie
+def csrf(request):
+    return JsonResponse({'csrfToken': request.META.get('CSRF_COOKIE')})
+
+
 # views.py
 from rest_framework.views import APIView
 from rest_framework import status
@@ -399,4 +407,100 @@ from .serializers import HomePropertySerializer
 class HomePropertyViewset(viewsets.ModelViewSet):
     queryset = HomeProperty.objects.all()
     serializer_class = HomePropertySerializer
+
+
+
+# Contact page
+
+# from django.core.mail import send_mail
+# from django.http import JsonResponse
+# from django.views.decorators.csrf import csrf_exempt
+# import json
+# from django.conf import settings
+
+# @csrf_exempt  # Disable CSRF check for this view
+# def contact_view(request):
+#     if request.method == "POST":
+#         try:
+#             # Parse the incoming JSON data
+#             data = json.loads(request.body)
+#             name = data.get("name")
+#             email = data.get("email")
+#             subject = data.get("subject")
+#             message = data.get("message")
+
+#             # Basic validation (you can add more)
+#             if not all([name, email, subject, message]):
+#                 return JsonResponse({"error": "All fields are required."}, status=400)
+
+#             # Sending email to the admin (you can customize the recipient)
+#             send_mail(
+#                 subject=f"Contact Form Message: {subject}",  # Subject of the email
+#                 message=f"Message from {name} ({email}):\n\n{message}",  # Body of the email
+#                 from_email=email,  # The user's email as the sender
+#                 recipient_list=[settings.DEFAULT_FROM_EMAIL],  # Admin email (configured in settings.py)
+#             )
+
+#             # Send a response back with a success message
+#             return JsonResponse({"message": "Your message has been sent!"}, status=201)
+
+#         except json.JSONDecodeError:
+#             return JsonResponse({"error": "Invalid JSON format."}, status=400)
+#         except Exception as e:
+#             # Log the exception to understand it better
+#             print(f"Error: {str(e)}")  # This will appear in your server logs
+#             return JsonResponse({"error": "Failed to process the message."}, status=500)
+#     return JsonResponse({"error": "Invalid request method."}, status=405)
+
+
+
+from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.conf import settings
+from .models import Contact  # Import the Contact model
+
+@csrf_exempt  # Disable CSRF check for this view
+def contact_view(request):
+    if request.method == "POST":
+        try:
+            # Parse the incoming JSON data
+            data = json.loads(request.body)
+            name = data.get("name")
+            email = data.get("email")
+            subject = data.get("subject")
+            message = data.get("message")
+
+            # Basic validation (you can add more)
+            if not all([name, email, subject, message]):
+                return JsonResponse({"error": "All fields are required."}, status=400)
+
+            # Save the contact data to the database
+            Contact.objects.create(
+                name=name,
+                email=email,
+                subject=subject,
+                message=message
+            )
+
+            # Sending email to the admin (you can customize the recipient)
+            send_mail(
+                subject=f"Contact Form Message: {subject}",  # Subject of the email
+                message=f"Message from {name} ({email}):\n\n{message}",  # Body of the email
+                from_email=email,  # The user's email as the sender
+                recipient_list=[settings.DEFAULT_FROM_EMAIL],  # Admin email (configured in settings.py)
+            )
+
+            # Send a response back with a success message
+            return JsonResponse({"message": "Your message has been sent and saved!"}, status=201)
+
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON format."}, status=400)
+        except Exception as e:
+            # Log the exception to understand it better
+            print(f"Error: {str(e)}")  # This will appear in your server logs
+            return JsonResponse({"error": "Failed to process the message."}, status=500)
+    return JsonResponse({"error": "Invalid request method."}, status=405)
+
 

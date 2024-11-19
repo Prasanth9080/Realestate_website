@@ -30,7 +30,7 @@ from django.contrib import admin
 from .models import RealEstateProperty
 
 class RealEstatePropertyAdmin(admin.ModelAdmin):
-    list_display = ['title', 'price', 'location', 'property_type', 'created_at']
+    list_display = ['id','title', 'price', 'location', 'property_type', 'created_at']
     search_fields = ['title', 'location']
     list_filter = ['property_type', 'created_at']
 
@@ -41,8 +41,18 @@ from django.contrib import admin
 from .models import HomeProperty
 
 class HomePropertyAdmin(admin.ModelAdmin):
-    list_display = ['title', 'price', 'location']
+    list_display = ['id','title', 'price', 'location']
     search_fields = ['title', 'location']
 
 admin.site.register(HomeProperty, HomePropertyAdmin)
+
+
+from django.contrib import admin
+from .models import Contact
+
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('name','email','subject','created_at','message')
+    search_fields = ('name','email','subject')
+
+admin.site.register(Contact, ContactAdmin)
 

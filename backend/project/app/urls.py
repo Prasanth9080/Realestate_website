@@ -39,6 +39,8 @@ urlpatterns = [
 
     path('/home', HomePageView.as_view(), name='home-api'),
     path('api/', include(router.urls)),
+    path('contact/', views.contact_view, name='Contact'),
+    path('csrf/', csrf, name='csrf'),
 
 ]
 

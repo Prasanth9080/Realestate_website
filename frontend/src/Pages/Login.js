@@ -70,7 +70,7 @@ function Login() {
       alert('Logged in successfully!');
       // Redirect after 1 second
       setTimeout(() => {
-        navigate('/'); // Redirect to the Product page
+        navigate('/home'); // Redirect to the Product page
       }, 1000); // 1000 milliseconds = 1 second
     } catch (error) {
       console.error(error);

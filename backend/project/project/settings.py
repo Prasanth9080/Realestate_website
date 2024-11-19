@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +28,14 @@ SECRET_KEY = 'django-insecure-)8w#4q!m@oan_36463nz&^og7lk2$bt!0-fkp3(#dn91m#t)xa
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',  # React app origin
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  # React app origin
+]
 
 
 # Application definition
@@ -62,6 +71,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_ALL_ORIGINS = True  # In production, use more specific CORS settings
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -69,11 +79,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
-
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -174,21 +182,36 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static')
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+env = environ.Env()
+environ.Env.read_env()
 
-EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER ='prasanthchaandhu02@gmail.com'
+# EMAIL_HOST_PASSWORD ="onzs xrlh uefj zzei"
+# EMAIL_USE_TLS = True
+# EMAIL_USE_SSL= False
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_API_KEY = 'onzs xrlh uefj zzei'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER ='rajanvigneesh56@gmail.com'
-EMAIL_HOST_PASSWORD ="pbsiqfeamugrajqk"
 EMAIL_USE_TLS = True
-EMAIL_USE_SSL= False
-
+EMAIL_HOST_USER = 'prasanthchaandhu02@gmail.com'  # Your Gmail address
+EMAIL_HOST_PASSWORD = 'onzs xrlh uefj zzei'  # Your Gmail password or App Password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+DEFAULT_TO_EMAIL = 'prasanthchaandhu02@gmail.com'
 
 ############    ///////// ###################################  ////////  ##############
 ############    /////////      Razor pay and Paypal Id's       ////////  ##############
