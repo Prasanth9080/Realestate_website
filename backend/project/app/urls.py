@@ -37,8 +37,9 @@ urlpatterns = [
  
     # home page
 
-    path('/api/home', HomePageView.as_view(), name='home'),
-    path('/api/contact/', views.contact_view, name='Contact'),
+    path('/home', HomePageView.as_view(), name='home'),
+    path('api/', include(router.urls)),  # Include the API routes under /api/
+    path('contact/', views.contact_view, name='contact'),  # Correct path here
 ]
 
 if settings.DEBUG:

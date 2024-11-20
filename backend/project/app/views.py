@@ -267,12 +267,12 @@ class HomePropertyViewset(viewsets.ModelViewSet):
 
 from django.core.mail import send_mail
 from django.http import JsonResponse
-# from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
 import json
 from django.conf import settings
 from .models import Contact  # Import the Contact model
 
-# @csrf_exempt  # Disable CSRF check for this view
+@csrf_exempt  # Disable CSRF check for this view
 def contact_view(request):
     if request.method == "POST":
         try:

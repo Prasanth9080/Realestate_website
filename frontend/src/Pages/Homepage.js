@@ -1,113 +1,171 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './Contact.css';
+import React, { useEffect, useState } from 'react';
 import Navbar from './navbar';
+import axios from 'axios';
+import './Homepage.css';
+import Slider from "react-slick";  // Import React Slick
+import Footer from './Footer.js'
 
-function Contact() {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
+const HomePage = () => {
+  const [properties, setProperties] = useState([]);
+  const [filteredProperties, setFilteredProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchLocation, setSearchLocation] = useState('');
+  const [propertyType, setPropertyType] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/api/properties/') // Fetch data from API
+      .then(response => {
+        console.log("Fetched properties:", response.data); // Check API data
+        setProperties(response.data);
+        setFilteredProperties(response.data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error("Error fetching properties:", error);
+        setLoading(false);
+      });
+  }, []);
+
+
+  // Define the settings object for the React Slick carousel
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,  // Change this number to show more/less images at once
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  // Handle search filtering
+  const handleSearch = () => {
+    const filtered = properties.filter(property => {
+      return (
+        (!searchLocation || property.location.toLowerCase().includes(searchLocation.toLowerCase())) &&
+        (!propertyType || property.property_type === propertyType) &&
+        (!minPrice || property.price >= parseInt(minPrice)) &&
+        (!maxPrice || property.price <= parseInt(maxPrice))
+      );
     });
-    const [responseMessage, setResponseMessage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const [csrfToken, setCsrfToken] = useState('');
+    console.log("Filtered properties:", filtered);
+    setFilteredProperties(filtered);
+  };
 
-    useEffect(() => {
-        // Fetch the CSRF token
-        axios.get('http://127.0.0.1:8000/contact/').then((response) => {
-            const csrfTokenFromCookie = document.cookie
-                .split('; ')
-                .find((row) => row.startsWith('csrftoken'))
-                ?.split('=')[1];
-            setCsrfToken(csrfTokenFromCookie || '');
-        });
-    }, []);
+  if (loading) return <p>Loading...</p>;
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+  return (
+    <div>
+      <Navbar />
+      <section className="hero-section">
+        <h1>Invest in Real Estate</h1>
+        <p>1 SQFT at a time!</p>
+      </section>
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setResponseMessage('');
-        setErrorMessage('');
-
-        try {
-            const response = await axios.post(
-                'http://127.0.0.1:8000/contact/',
-                formData,
-                {
-                    headers: {
-                        'X-CSRFToken': csrfToken,
-                    },
-                }
-            );
-            if (response.status === 201) {
-                setResponseMessage(response.data.message);
-                setFormData({ name: '', email: '', subject: '', message: '' });
-            }
-        } catch (error) {
-            if (error.response) {
-                setErrorMessage('Failed to send your message. Please try again.');
-            }
-        }
-    };
-
-    return (
-        <div>
-            <Navbar />
-            <div className="contact-container">
-                <h1>Contact Us</h1>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>Name:</label>
-                        <input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Email:</label>
-                        <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Subject:</label>
-                        <input
-                            type="text"
-                            name="subject"
-                            value={formData.subject}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Message:</label>
-                        <textarea
-                            name="message"
-                            value={formData.message}
-                            onChange={handleChange}
-                            required
-                        ></textarea>
-                    </div>
-                    <button type="submit">Send Message</button>
-                </form>
-                {responseMessage && <p className="success-message">{responseMessage}</p>}
-                {errorMessage && <p className="error-message">{errorMessage}</p>}
-            </div>
+      <section className="search-filter">
+        <h2>Search for Properties</h2>
+        <div className="search-inputs">
+          <input
+            type="text"
+            placeholder="Location"
+            value={searchLocation}
+            onChange={(e) => setSearchLocation(e.target.value)}
+          />
+          <select value={propertyType} onChange={(e) => setPropertyType(e.target.value)}>
+            <option value="">Property Type</option>
+            <option value="residential">Residential</option>
+            <option value="commercial">Commercial</option>
+          </select>
+          <input
+            type="number"
+            placeholder="Min Price"
+            value={minPrice}
+            onChange={(e) => setMinPrice(e.target.value)}
+          />
+          <input
+            type="number"
+            placeholder="Max Price"
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value)}
+          />
+          <button onClick={handleSearch}>Search</button>
         </div>
-    );
-}
+      </section>
 
-export default Contact;
- 
+      <section className="featured-properties">
+        <h2>Featured Properties</h2>
+        <div className="row">
+          {filteredProperties.length > 0 ? (
+            filteredProperties.map(property => (
+              <div key={property.id} className="col-lg-3 col-md-4 col-sm-12 mb-4">
+                <div className="property-card">
+                  <img
+                    src={property.image} // Ensure media files are served correctly
+                    alt={property.title}
+                    className="img-fluid"
+                  />
+                  <div className="property-card-content">
+                    <h3>{property.title}</h3>
+                    <p>{property.description}</p>
+                    <p className="property-card-price">${property.price.toLocaleString()}</p>
+                    <button className='bg-info'>View Details</button>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No properties found.</p>
+          )}
+        </div>
+      </section>
+
+      <section className="featured-properties">
+        <h2>Build Properties</h2>
+        <h6>Properties below</h6>
+        
+        {/* Carousel */}
+        <Slider {...settings}>
+          {properties.length > 0 ? (
+            properties.map(property => (
+              <div key={property.id}>
+                <div className="property-card">
+                  <img
+                    src={property.image}  // Make sure the image URL is correct
+                    alt={property.title}
+                    className="img-fluid"
+                  />
+                  <div className="property-card-content">
+                    <h3>{property.title}</h3>
+                    <p>{property.description}</p>
+                    <p className="property-card-price">${property.price.toLocaleString()}</p>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No properties found.</p>
+          )}
+        </Slider>
+      </section>
+      <Footer />
+    </div>
+  );
+};
+
+export default HomePage;

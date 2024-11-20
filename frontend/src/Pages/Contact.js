@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Contact.css';
 import Navbar from './navbar';
+import Footer from './Footer.js';
 
 function Contact() {
     const [formData, setFormData] = useState({
@@ -48,8 +49,8 @@ function Contact() {
     return (
         <div>
             <Navbar />
-            <div className="contact-container">
-                <h1>Contact Us</h1>
+            <section className="hero-section"></section>
+            <div className="contact-container my-3">
                 <form onSubmit={handleSubmit} method="POST">
                     <div>
                         <label>Name:</label>
@@ -95,6 +96,7 @@ function Contact() {
                 {responseMessage && <p className="success-message">{responseMessage}</p>}
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
             </div>
+            <Footer />
         </div>
     );
 }

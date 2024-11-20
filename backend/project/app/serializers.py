@@ -81,7 +81,8 @@ from .models import HomeProperty
 class HomePropertySerializer(serializers.ModelSerializer):
     class Meta:
         model = HomeProperty
-        fields = '__all__'
+        fields = ['id', 'title', 'description', 'price', 'location', 'image']
+
 
         
 # Contact
