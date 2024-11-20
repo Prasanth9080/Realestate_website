@@ -37,12 +37,10 @@ urlpatterns = [
  
     # home page
 
-    path('/home', HomePageView.as_view(), name='home-api'),
-    path('api/', include(router.urls)),
-    path('contact/', views.contact_view, name='Contact'),
-    path('csrf/', csrf, name='csrf'),
-
+    path('/api/home', HomePageView.as_view(), name='home'),
+    path('/api/contact/', views.contact_view, name='Contact'),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
