@@ -1,12 +1,12 @@
 import React from 'react';
 import './About.css';
-import Navbar from './navbar.js'
-import Footer from './Footer.js'
+import Navbar from './navbar.js';
+import Footer from './Footer.js';
 
 const AboutPage = () => {
   return (
     <div className="about-page">
-        <Navbar />
+      <Navbar />
       <section className="hero-section text-center py-5">
         <div className="container">
           <h1 className="display-4 text-black">About Us</h1>
@@ -22,6 +22,11 @@ const AboutPage = () => {
           <p>
             Our mission is to provide high-quality solutions to our customers. We focus on 
             innovation, customer satisfaction, and excellence in everything we do.
+            Founded in 2020, our company has consistently focused on providing top-notch 
+            solutions to meet the evolving needs of our customers. Our team is composed of 
+            dedicated professionals who strive to innovate and exceed expectations in 
+            everything we do. From the initial stages of planning to the final execution, 
+            we ensure quality, transparency, and customer satisfaction at every step.
           </p>
         </div>
       </section>
@@ -32,7 +37,7 @@ const AboutPage = () => {
           <div className="row">
             <div className="col-lg-4 col-md-6 mb-4 text-center">
               <img
-                src="team-member1.jpg" // Replace with real image URL or dynamic path
+                src="/assets/images/profile-icon-design-free-vector.jpg" // Replace with real image URL or dynamic path
                 alt="Team Member 1"
                 className="img-fluid rounded-circle mb-3"
                 style={{ width: '150px', height: '150px' }}
@@ -42,7 +47,7 @@ const AboutPage = () => {
             </div>
             <div className="col-lg-4 col-md-6 mb-4 text-center">
               <img
-                src="team-member2.jpg"
+                src="/assets/images/profile-icon-design-free-vector.jpg"
                 alt="Team Member 2"
                 className="img-fluid rounded-circle mb-3"
                 style={{ width: '150px', height: '150px' }}
@@ -52,7 +57,7 @@ const AboutPage = () => {
             </div>
             <div className="col-lg-4 col-md-6 mb-4 text-center">
               <img
-                src="team-member3.jpg"
+                src="/assets/images/profile-icon-design-free-vector.jpg"
                 alt="Team Member 3"
                 className="img-fluid rounded-circle mb-3"
                 style={{ width: '150px', height: '150px' }}
@@ -88,7 +93,7 @@ const AboutPage = () => {
         <div className="container text-center">
           <h2>Get in Touch</h2>
           <p className="mt-3">
-            Contact us at <a href="mailto:contact@example.com">contact@example.com</a>
+            Contact us at <a href="mailto:contact@example.com">phoenixmarketing@gmail.com</a>
           </p>
         </div>
       </section>

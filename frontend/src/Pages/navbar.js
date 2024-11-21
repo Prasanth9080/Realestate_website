@@ -13,18 +13,19 @@ const navbar = () => {
               </button>
               <div className='collapse navbar-collapse' id='navbarSupportedContent'>
                   <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
-                      <li className='nav-item'>
-                        <a className='nav-link active' aria-current='page' href='/home'>Home</a>
-                      </li>
-                      <li className='nav-item'>
-                        <a className='nav-link active' aria-current='page' href='/about'>About</a>
-                      </li>
-                      <li className='nav-item'>
-                        <a className='nav-link active' aria-current='page' href='/contact'>Contact</a>
-                      </li>
+                      
                   </ul>
                   <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
-                    <li class="nav-item dropdown">
+                    <li className='nav-item mx-1'>
+                        <a className='nav-link active' aria-current='page' href='/home'>Home</a>
+                    </li>
+                    <li className='nav-item mx-1'>
+                        <a className='nav-link active' aria-current='page' href='/about'>About</a>
+                    </li>
+                    <li className='nav-item mx-1'>
+                        <a className='nav-link active' aria-current='page' href='/contact'>Contact</a>
+                    </li>
+                    <li class="nav-item dropdown mx-1">
                           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Dropdown
                           </a>
@@ -33,7 +34,7 @@ const navbar = () => {
                             <li><a class="dropdown-item" href="signup">Signup</a></li>
                           </ul>
                     </li>
-                    <li className='nav-item'>
+                    <li className='nav-item mx-1'>
                       <a className='nav-link active' aria-current='page' href='/login'>Logout</a>
                     </li>
                   </ul>
