@@ -8,7 +8,7 @@ body {
   .hero-section {
     padding: 50px;
     text-align: center;
-    background-image: url('C:\Alt_drx\frontend\public\assets\images\person-owning-multiple-property.jpg');
+    background-image: url(images/property.jpg);
     background-size: cover;
     color: white;
   }
