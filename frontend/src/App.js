@@ -9,7 +9,7 @@ import Homepage from "./Pages/Homepage";
 import RazorpayPayment from "./Pages/RazorpayPayment";
 import AboutPage from "./Pages/About";
 import Contact from "./Pages/Contact";
-
+import Invest from "./Pages/Invest";
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
                <Route path="/razorpay" element={<RazorpayPayment/>}/>
                <Route path="/about" element={<AboutPage/>}/>
                <Route path="/contact" element={<Contact/>}/>
+               <Route path="/invest" element={<Invest />}/>
            </Routes>
       </BrowserRouter>
     </div>
