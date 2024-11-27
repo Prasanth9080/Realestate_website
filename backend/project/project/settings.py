@@ -72,7 +72,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
 
     ),
     'DEFAULT_PERMISSION_CLASSES': (
@@ -190,3 +190,9 @@ EMAIL_USE_SSL= False
 
 RAZORPAY_KEY_ID = ("rzp_test_2lMA6SnGa6x6Br")
 RAZORPAY_KEY_SECRET = ("DjiZyXpSiRt7C2ZDDWw5ti87")
+
+
+
+RAZORPAY_SECRET = "DjiZyXpSiRt7C2ZDDWw5ti87"
+
+

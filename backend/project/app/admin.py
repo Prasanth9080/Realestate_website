@@ -18,9 +18,21 @@ admin.site.register(User, CustomUserAdmin)
 #### Razor pay:
 
 from django.contrib import admin
-from .models import Transaction
+from .models import Razorpay
 
-class TransactionAdmin(admin.ModelAdmin):
-   list_display = ('id','user','payment_id', 'order_id', 'signature', 'amount','currency','status','created_at',)
 
-admin.site.register(Transaction, TransactionAdmin)
+class RazorpayAdmin(admin.ModelAdmin):
+   list_display = ('id','user','payment_id', 'order_id', 'signature', 'amount','status','created_at', )
+
+admin.site.register(Razorpay, RazorpayAdmin)
+
+
+# @admin.register(Razorpay)
+# class RazorpayAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'get_user', 'payment_id', 'order_id', 'amount', 'status', 'created_at')
+#     list_filter = ('status', 'created_at', 'currency')
+#     search_fields = ('user__username', 'payment_id', 'order_id')
+
+#     def get_user(self, obj):
+#         return obj.user.username if obj.user else "No User"
+#     get_user.short_description = 'User'
