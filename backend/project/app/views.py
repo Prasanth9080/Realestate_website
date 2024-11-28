@@ -136,32 +136,6 @@ class ResetPasswordConfirmView(APIView):
 
 
 # views.py  new
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from app.razorpay.main import RazorpayClient
-from .serializers import RazorpayOrderSerializer, TranscationModelSerializer
-
-rz_client = RazorpayClient()
-
-class RazorpayOrderAPIView(APIView):
-    """This API creates a Razorpay order and returns the order ID"""
-    
-    def post(self, request):
-        amount = request.data.get("amount")
-        currency = request.data.get("currency")
-        
-        try:
-            razorpay_order = rz_client.create_order(amount=amount, currency=currency)
-            response = {
-                "status_code": status.HTTP_201_CREATED,
-                "order_id": razorpay_order["id"]
-            }
-            return Response(response, status=status.HTTP_201_CREATED)
-
-        except Exception as e:
-            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
-
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -172,63 +146,6 @@ def csrf(request):
 
 
 # views.py
-from rest_framework.views import APIView
-from rest_framework import status
-from .serializers import RazorpayOrderSerializer, TranscationModelSerializer
-from app.razorpay.main import RazorpayClient
-from rest_framework.response import Response
-
-from rest_framework.permissions import IsAuthenticated  # Import this to require authentication
-from rest_framework.authentication import TokenAuthentication  # Use token authentication if needed
-
-rz_client = RazorpayClient()
-class TransactionAPIView(APIView):
-    """This API will complete the order and save the transaction with the logged-in user's information"""
-    authentication_classes = [TokenAuthentication]  # Use TokenAuthentication for logged-in users
-    permission_classes = [IsAuthenticated]  # Require users to be authenticated
-
-    def post(self, request):
-        transaction_serializer = TranscationModelSerializer(data=request.data)
-        
-        if transaction_serializer.is_valid():
-            try:
-                # Verifying payment signature
-                rz_client.verify_payment_signature(
-                    razorpay_payment_id=transaction_serializer.validated_data.get("payment_id"),
-                    razorpay_order_id=transaction_serializer.validated_data.get("order_id"),
-                    razorpay_signature=transaction_serializer.validated_data.get("signature")
-                )
-
-                # Save the transaction with the status set to 'complete' and assign the logged-in user
-                transaction = transaction_serializer.save(
-                    status='complete', 
-                    currency=request.data.get("currency"),
-                    user=request.user  # Associate the transaction with the current user
-                )
-                
-                response = {
-                    "status_code": status.HTTP_201_CREATED,
-                    "message": "Transaction completed successfully",
-                    "transaction_id": transaction.id,
-                    "user": request.user.username  # Optional: return username for confirmation
-                }
-                return Response(response, status=status.HTTP_201_CREATED)
-
-            except Exception as e:
-                response = {
-                    "status_code": status.HTTP_400_BAD_REQUEST,
-                    "message": str(e)
-                }
-                return Response(response, status=status.HTTP_400_BAD_REQUEST)
-
-        else:
-            response = {
-                "status_code": status.HTTP_400_BAD_REQUEST,
-                "message": "Bad request",
-                "error": transaction_serializer.errors
-            }
-            return Response(response, status=status.HTTP_400_BAD_REQUEST)
-
 
 from rest_framework.views import APIView
 from rest_framework.response import Response

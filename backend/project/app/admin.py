@@ -18,13 +18,13 @@ admin.site.register(User, CustomUserAdmin)
 #### Razor pay:
 
 from django.contrib import admin
-from .models import Transaction
+from .models import Razorpay
 
-class TransactionAdmin(admin.ModelAdmin):
-   list_display = ('id','user','payment_id', 'order_id', 'signature', 'amount','currency','status','created_at',)
 
-admin.site.register(Transaction, TransactionAdmin)
+class RazorpayAdmin(admin.ModelAdmin):
+   list_display = ('id','user','payment_id', 'order_id', 'signature', 'amount','status','created_at', )
 
+admin.site.register(Razorpay, RazorpayAdmin)
 
 from django.contrib import admin
 from .models import RealEstateProperty

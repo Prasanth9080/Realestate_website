@@ -220,3 +220,6 @@ DEFAULT_TO_EMAIL = 'prasanthchaandhu02@gmail.com'
 
 RAZORPAY_KEY_ID = ("rzp_test_2lMA6SnGa6x6Br")
 RAZORPAY_KEY_SECRET = ("DjiZyXpSiRt7C2ZDDWw5ti87")
+
+
+RAZORPAY_SECRET = "DjiZyXpSiRt7C2ZDDWw5ti87"
