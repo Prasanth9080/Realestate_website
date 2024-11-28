@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from './navbar';
 import axios from 'axios';
 import './Homepage.css';
 import Slider from "react-slick";  // Import React Slick
-import Footer from './Footer.js'
 
 const HomePage = () => {
   const [properties, setProperties] = useState([]);
@@ -72,7 +70,6 @@ const HomePage = () => {
 
   return (
     <div>
-      <Navbar />
       <section className="hero-section">
         <h1>Invest in Real Estate</h1>
         <p>1 SQFT at a time!</p>
@@ -163,7 +160,6 @@ const HomePage = () => {
           )}
         </Slider>
       </section>
-      <Footer />
     </div>
   );
 };

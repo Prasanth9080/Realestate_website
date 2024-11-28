@@ -1,12 +1,10 @@
 import React from 'react';
 import './About.css';
-import Navbar from './navbar.js';
-import Footer from './Footer.js';
+
 
 const AboutPage = () => {
   return (
     <div className="about-page">
-      <Navbar />
       <section className="hero-section text-center py-5">
         <div className="container">
           <h1 className="display-4 text-black">About Us</h1>
@@ -97,7 +95,6 @@ const AboutPage = () => {
           </p>
         </div>
       </section>
-      <Footer />
     </div>
   );
 };

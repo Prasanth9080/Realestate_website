@@ -6,17 +6,21 @@ import Forgotpassword from "./Pages/Forgotpassword";
 import Reset_Password from "./Pages/Reset_Password";
 import Resetpassword from "./Pages/Resetpassword";
 import Homepage from "./Pages/Homepage";
-
 import Razorpay from "./Pages/Razorpay";
 import AboutPage from "./Pages/About";
 import Contact from "./Pages/Contact";
 import Invest from "./Pages/Invest";
+import Footer from './Pages/Footer';
+import Navmenu from "./Pages/Navmenu";
+import Notfound from "./Pages/Notfound";
+
 
 function App() {
   return (
     <div className="App">
         {/* <h2>Welcome Bro</h2> */}
       <BrowserRouter>
+      <Navmenu />
            <Routes>
                <Route path="/" element={<Login/>}></Route>
                <Route path="/home" element={<Homepage/>}/>
@@ -29,8 +33,9 @@ function App() {
                <Route path="/contact" element={<Contact/>}/>
                <Route path="/invest" element={<Invest />}/>
                <Route path="/razorpay" element={<Razorpay/>}/>
-
+               <Route path="*" element={<Notfound/>}/>
            </Routes>
+           <Footer />
       </BrowserRouter>
     </div>
   );

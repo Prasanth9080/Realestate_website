@@ -283,10 +283,10 @@ function Razorpay() {
   };
 
   return (
-    <div className="container rounded bg-warning border" style={{ width: "50%" }}>
+    <div className="container rounded bg-white border my-5" style={{ width: "50%" }}>
       <div className="d-flex justify-content-between align-items-center">
         <h1 className="fw-bolder display-2">₹500</h1>
-        <button className="btn btn-danger" onClick={handleLogout}>
+        <button className="btn btn-outline-danger" onClick={handleLogout}>
           Logout
         </button>
       </div>
@@ -306,7 +306,7 @@ function Razorpay() {
         <div className="d-grid mt-3">
           <button
             type="button"
-            className="btn btn-light fw-semibold py-3"
+            className="btn btn-danger fw-semibold py-3"
             onClick={razorpayPayment}
           >
             Pay now

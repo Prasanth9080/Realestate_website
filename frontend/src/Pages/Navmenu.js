@@ -1,8 +1,17 @@
 import React from "react";
-import './navbar.css';
+import './Navmenu.css';
+import { useNavigate } from "react-router-dom";
 
 
-const navbar = () => {
+function Navmenu() {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        navigate("/login")
+    };
+
+
     return(
         <div>
             <nav className='navbar navbar-expand-lg bg-white bg-gradient p-3'>
@@ -27,6 +36,9 @@ const navbar = () => {
                     <li className='nav-item mx-1'>
                         <a className='nav-link active' aria-current='page' href='/contact'>Contact</a>
                     </li>
+                    <li className='nav-item mx-1'>
+                        <a className='nav-link active' aria-current='page' href='/razorpay'>Payment</a>
+                    </li>
                     <li class="nav-item dropdown mx-1">
                           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Dropdown
@@ -36,7 +48,7 @@ const navbar = () => {
                             <li><a class="dropdown-item" href="signup">Signup</a></li>
                           </ul>
                     </li>
-                    <li className='nav-item mx-1'>
+                    <li className='nav-item mx-1' onClick={handleLogout}>
                       <a className='nav-link active' aria-current='page' href='/login'>Logout</a>
                     </li>
                   </ul>
@@ -48,5 +60,5 @@ const navbar = () => {
 }
 
 
-export default navbar
+export default Navmenu
 

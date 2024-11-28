@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Contact.css';
-import Navbar from './navbar';
-import Footer from './Footer.js';
+
 
 function Contact() {
     const [formData, setFormData] = useState({
@@ -48,7 +47,6 @@ function Contact() {
 
     return (
         <div>
-            <Navbar />
             <section className="hero-section"></section>
             <h2 className='text-center m-3'>Contact page</h2>
             <div className='container'>
@@ -104,7 +102,6 @@ function Contact() {
             </div>
             </div>
             </div>
-            <Footer />
         </div>
     );
 }

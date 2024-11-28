@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from './navbar';
-import Footer from './Footer.js';
 import './Invest.css'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Invest = () => {
     return (
         <div className='invest-container'>
-            <Navbar />
             <div className='container my-5'>
                 <h3 className='invest-heading1'>TradeX Buy & Sell</h3>
                 <div className='invest-heading2'>
@@ -130,8 +127,6 @@ const Invest = () => {
                         </button>
                     </div>
                 </div>
-
-            <Footer />
         </div>
     )
 }
