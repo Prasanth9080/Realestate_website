@@ -1,0 +1,36 @@
+.hero-section {
+    color: #fff;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .our-mission,
+  .our-team,
+  .values-section,
+  .contact-info {
+    padding: 40px 20px;
+  }
+  
+  .our-team img {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .our-team img:hover {
+    transform: scale(1.1);
+  }
+  
+  .values-section h5 {
+    color: #007bff;
+  }
+  
+  .contact-info a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .contact-info a:hover {
+    text-decoration: underline;
+  }
+  
