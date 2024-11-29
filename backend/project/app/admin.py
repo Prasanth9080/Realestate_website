@@ -18,20 +18,41 @@ admin.site.register(User, CustomUserAdmin)
 #### Razor pay:
 
 from django.contrib import admin
-from .models import Transaction
+from .models import Razorpay
 
-class TransactionAdmin(admin.ModelAdmin):
-   list_display = ('id','user','payment_id', 'order_id', 'signature', 'amount','currency','status','created_at',)
 
-admin.site.register(Transaction, TransactionAdmin)
+class RazorpayAdmin(admin.ModelAdmin):
+   list_display = ('id','user','payment_id', 'order_id', 'signature', 'amount','status','created_at', )
 
+admin.site.register(Razorpay, RazorpayAdmin)
 
 from django.contrib import admin
 from .models import RealEstateProperty
 
 class RealEstatePropertyAdmin(admin.ModelAdmin):
-    list_display = ['title', 'price', 'location', 'property_type', 'created_at']
+    list_display = ['id','title', 'price', 'location', 'property_type', 'created_at']
     search_fields = ['title', 'location']
     list_filter = ['property_type', 'created_at']
 
 admin.site.register(RealEstateProperty, RealEstatePropertyAdmin)
+
+
+from django.contrib import admin
+from .models import HomeProperty
+
+class HomePropertyAdmin(admin.ModelAdmin):
+    list_display = ['id','title', 'price', 'location']
+    search_fields = ['title', 'location']
+
+admin.site.register(HomeProperty, HomePropertyAdmin)
+
+
+from django.contrib import admin
+from .models import Contact
+
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('name','email','subject','created_at','message')
+    search_fields = ('name','email','subject')
+
+admin.site.register(Contact, ContactAdmin)
+

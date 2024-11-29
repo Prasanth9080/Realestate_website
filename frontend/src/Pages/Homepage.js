@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from './navbar';
 import axios from 'axios';
 import './Homepage.css';
+import Slider from "react-slick";  // Import React Slick
 
 const HomePage = () => {
   const [properties, setProperties] = useState([]);
@@ -13,9 +13,9 @@ const HomePage = () => {
   const [maxPrice, setMaxPrice] = useState('');
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/properties/') // Correct endpoint
+    axios.get('http://127.0.0.1:8000/api/properties/') // Fetch data from API
       .then(response => {
-        console.log("Fetched properties:", response.data); // Debugging
+        console.log("Fetched properties:", response.data); // Check API data
         setProperties(response.data);
         setFilteredProperties(response.data);
         setLoading(false);
@@ -25,6 +25,32 @@ const HomePage = () => {
         setLoading(false);
       });
   }, []);
+
+
+  // Define the settings object for the React Slick carousel
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,  // Change this number to show more/less images at once
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
   // Handle search filtering
   const handleSearch = () => {
@@ -44,11 +70,9 @@ const HomePage = () => {
 
   return (
     <div>
-      <Navbar />
       <section className="hero-section">
-        <h1>Find Your Dream Property</h1>
-        <p>Browse through our collection of properties for sale or rent.</p>
-        <button>Explore Now</button>
+        <h1>Invest in Real Estate</h1>
+        <p>1 SQFT at a time!</p>
       </section>
 
       <section className="search-filter">
@@ -83,15 +107,15 @@ const HomePage = () => {
 
       <section className="featured-properties">
         <h2>Featured Properties</h2>
-        <div className="row"> {/* Use Bootstrap's row class */}
+        <div className="row">
           {filteredProperties.length > 0 ? (
             filteredProperties.map(property => (
-              <div key={property.id} className="col-lg-3 col-md-4 col-sm-12 mb-4"> {/* Responsive grid */}
+              <div key={property.id} className="col-lg-3 col-md-4 col-sm-12 mb-4">
                 <div className="property-card">
                   <img
-                    src={`http://127.0.0.1:8000${property.image}`}
+                    src={property.image} // Ensure media files are served correctly
                     alt={property.title}
-                    className="img-fluid" // Make image responsive
+                    className="img-fluid"
                   />
                   <div className="property-card-content">
                     <h3>{property.title}</h3>
@@ -108,13 +132,33 @@ const HomePage = () => {
         </div>
       </section>
 
-          
-      <section className='featured-properties'>
+      <section className="featured-properties">
         <h2>Build Properties</h2>
         <h6>Properties below</h6>
-          <div className='carousel'>
-
-          </div>
+        
+        {/* Carousel */}
+        <Slider {...settings}>
+          {properties.length > 0 ? (
+            properties.map(property => (
+              <div key={property.id}>
+                <div className="property-card">
+                  <img
+                    src={property.image}  // Make sure the image URL is correct
+                    alt={property.title}
+                    className="img-fluid"
+                  />
+                  <div className="property-card-content">
+                    <h3>{property.title}</h3>
+                    <p>{property.description}</p>
+                    <p className="property-card-price">${property.price.toLocaleString()}</p>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No properties found.</p>
+          )}
+        </Slider>
       </section>
     </div>
   );

@@ -1,10 +1,30 @@
 /* App.css */
+body {
+  font-family: 'Poppins', sans-serif; /* Replace 'Poppins' with your preferred font */
+  font-size: 16px; /* Optional: Set a base font size */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures consistent box model */
+}
+
 button {
-    font-size: 1rem;
-    padding: 10px 20px;
-  }
-  
-  button:hover {
-    opacity: 0.9;
-  }
-  
+  font-size: 1rem;
+  padding: 10px 20px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* App.css */
+html, body {
+  font-family: 'Poppins', sans-serif; /* Ensure the font is applied globally */
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button, h1, h2, h3, h4, h5, h6, p, a, span {
+  font-family: inherit; /* Inherit the font-family from body */
+}

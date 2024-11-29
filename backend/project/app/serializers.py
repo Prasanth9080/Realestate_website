@@ -46,21 +46,8 @@ class LoginSerializer(serializers.Serializer):
 
 #### Razorpay
 
-from rest_framework import serializers
-from .models import Transaction
 
-
-class RazorpayOrderSerializer(serializers.Serializer):
-    amount = serializers.IntegerField()
-    currency = serializers.CharField()
-
-
-class TranscationModelSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Transaction
-        fields = ["payment_id", "order_id", "signature", "amount","currency", "status","created_at","customer_address", "user"]
-
+# Home page filter function
 
 from rest_framework import serializers
 from .models import RealEstateProperty
@@ -69,3 +56,26 @@ class RealEstatePropertySerializer(serializers.ModelSerializer):
     class Meta:
         model = RealEstateProperty
         fields = '__all__'  # You can specify the fields you need here
+
+
+# Home page home property
+
+from rest_framework import serializers
+from .models import HomeProperty
+
+class HomePropertySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HomeProperty
+        fields = ['id', 'title', 'description', 'price', 'location', 'image']
+
+
+        
+# Contact
+
+from rest_framework import serializers
+from .models import Contact
+
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = ['id', 'name', 'email', 'subject', 'message', 'created_at']

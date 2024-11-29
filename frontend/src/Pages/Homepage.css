@@ -1,3 +1,8 @@
+/* Add this in your CSS file */
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -8,19 +13,23 @@ body {
   .hero-section {
     padding: 50px;
     text-align: center;
-    background-image: url(images/property.jpg);
+    background-image: url(Images/property.jpg);
     background-size: cover;
     color: white;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   
   .hero-section h1 {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     margin-bottom: 10px;
+    color: #3C3D37;
   }
   
   .hero-section p {
-    font-size: 1.2rem;
+    font-size: 2.2rem;
     margin-bottom: 20px;
+    color: #3C3D37;
   }
   
   .hero-section button {
@@ -42,6 +51,7 @@ body {
   .search-filter h2 {
     font-size: 2rem;
     margin-bottom: 20px;
+    color: rgb(63, 61, 61);
   }
   
   .search-filter input,
@@ -70,6 +80,7 @@ body {
   .featured-properties h2 {
     font-size: 2rem;
     margin-bottom: 20px;
+    color: rgb(63, 61, 61);
   }
   
   .property-card {
@@ -94,6 +105,8 @@ body {
   .property-card h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
+    color: rgb(63, 61, 61);
+
   }
   
   .property-card p {
@@ -125,6 +138,7 @@ body {
   .why-choose-us h2 {
     font-size: 2rem;
     margin-bottom: 20px;
+    color: rgb(63, 61, 61);
   }
   
   .why-choose-us p {
@@ -149,10 +163,13 @@ body {
     font-size: 1.3rem;
     color: #333;
     margin-bottom: 10px;
+    color: rgb(63, 61, 61);
   }
   
   .why-choose-us-item p {
     font-size: 1rem;
     color: #666;
   }
+  
+
   

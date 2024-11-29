@@ -26,19 +26,14 @@ urlpatterns = [
 
 
     ### Razorpay
-    path("order/create/", 
-        RazorpayOrderAPIView.as_view(), 
-        name="razorpay-create-order-api"
-    ),
-    path("order/complete/", 
-        TransactionAPIView.as_view(), 
-        name="razorpay-complete-order-api"
-    ),
-
+ 
     # home page
 
-    path('home/', HomePageView.as_view(), name='home-api'),
-    path('api/', include(router.urls)),
+    path('/home', HomePageView.as_view(), name='home'),
+    path('api/', include(router.urls)),  # Include the API routes under /api/
+    path('contact/', views.contact_view, name='contact'),  # Correct path here
+]
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
