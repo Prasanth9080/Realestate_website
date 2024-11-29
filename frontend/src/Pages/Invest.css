@@ -11,7 +11,7 @@
 }
 
 .invest-container {
-    background-image: url('C:\Alt_drx\frontend\public\assets\images\360_F_220911898_L76bNmS7LKGfdDgWtsYDocULFqeDUKug.jpg'); /* Update with your image path */
+    background-image: url(Images/white_background.jpg); /* Update with your image path */
     background-size: cover; /* Ensures the image covers the entire background */
     background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* Prevents the image from repeating */
