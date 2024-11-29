@@ -34,6 +34,8 @@ class Razorpay(models.Model):
     def __str__(self):
          return f"{self.user.username if self.user else 'No User'} - {self.id}"
 
+
+
 # app/models.py
 from django.db import models
 
